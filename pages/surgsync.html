@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Title - KevinWuWorld</title>
+    <link rel="icon" type="image/png" href="../assets/images/site_icon.png">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="header-wrapper">
+            <div class="site-title">
+                <a href="../index.html">KevinWuWorld</a>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../coming-soon.html">Publications</a></li>
+                    <li><a href="../coming-soon.html">Visual Blog (Mostly Non-CS)</a></li>
+                    <li><a href="../assets/files/Kevin_Wu_CV_R2025.pdf" target="_blank">CV</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Article Container -->
+    <div class="blog-container">
+        <article class="blog-article">
+            <!-- Article Header -->
+            <header class="blog-header">
+                <h1 class="blog-title">SurgSync: Time-Synchronized Multi-modal Data Collection Framework for Surgical Robotics</h1>
+                <!-- <div class="blog-meta"> -->
+                    <!-- <span class="blog-date">
+                        <i class="fa-regular fa-calendar"></i>
+                        December 30, 2025
+                    </span>
+                    <span class="blog-reading-time">
+                        <i class="fa-regular fa-clock"></i>
+                        5 min read
+                    </span> -->
+                <!-- </div> -->
+            </header>
+
+            <!-- Article Content -->
+            <div class="blog-content">
+
+
+                <!-- Image with caption -->
+                <figure class="blog-image" style="width: 60%; margin: 2rem auto;">
+                    <img src="../assets/images/pages/surgsync/overall_setup.png" alt="Image description">
+                    <figcaption>⬆️ Overall experimental setup. We record 8 ROS topics: 3 video streams [left/right stereo, side view], plus 5 kinematic streams [ECM, PSM1, PSM2, PSM3(optional), contact sensor]. </figcaption>
+                </figure>
+
+                <h2>Motivation</h2>
+                
+                <p>
+                    A key challenge faced by all teams conducting surgical robotics research: the collection of high-quality, synchronized multi-modal data.
+         
+                    Issues with traditional ROS synchronization utilities such as message_filters::sync::ApproximateTime:
+                    <ul>
+                        <li>Do not enforce strict time tolerance between data streams (matching is conducted on a best-effort basis)</li>
+                        <li>Large quantities of output are dropped, when recording many topics  - for example, when 8 ROS topics mentioned above are simultaneously subscribed</li>
+                    </ul>
+                </p>
+
+                <figure class="blog-image" style="width: 70%; margin: 1.5rem auto;">
+                    <img src="../assets/images/pages/surgsync/message_filter_errors.png" alt="Image description">
+                    <figcaption>⬆️ Errors seen when subscribing to only 4 topics with ROS message_filters. Imagine recording 8 or more topics!</figcaption>
+                </figure>
+
+
+
+                <h2>Summary of Our Data Pipeline</h2>
+
+                <figure class="blog-image" style="width: 90%; margin: 0.5rem auto;">
+                    <img src="../assets/images/pages/surgsync/pipeline_architecture.png" alt="Image description">
+                    <figcaption> Overall pipeline architecture. </figcaption>
+                </figure>
+                
+                <p>
+                     
+                </p>
+
+                <figure class="blog-image" style="width: 90%; margin: 0.5rem auto;">
+                    <img src="../assets/images/pages/surgsync/pipeline_functionality.png" alt="Image description">
+                    <figcaption> Main functionalities of our data pipeline: synchronized data recording, depth/disparity from stereo, kinematic reprojection, and optical flow calculationl. </figcaption>
+                </figure>
+
+                
+                <h3>Synchronized Data Recorders</h3>
+
+                <p>
+                    We designed and implemented two novel synchronized recorders in C++ compatible with both ROS1 and ROS2, which aim to record 
+                    temporally aligned data streams across multiple sensing modalities:
+                    <ul>
+                        <li><b>Online-Matching Recorder:</b> The design enforces strict
+                            time synchronization using multi-threading: only samples that
+                            fall within a user-defined time tolerance are admitted. This
+                            yields slightly uneven inter-sample intervals (irregular ∆t),
+                            but it retains the natural continuity of smooth teleoperation
+                            segments and avoids label/feature drift. <b>This design can be used for
+                            real-time scenarios</b>.</li>
+                        <li><b>Offline-Matching Recorder:</b> Our offline-matching ap-
+                            proach decouples recording from time alignments to maximize
+                            the recording system efficiency. <b>It is the more suitable choice for
+                            offline learning workflows,</b> where deterministic post-processing
+                            is preferable to on-the-fly data matching.</li>
+                    </ul>
+                </p>
+
+                <figure class="blog-image" style="width: 90%; margin: 0.5rem auto;">
+                    <img src="../assets/images/pages/surgsync/recorder_code.png" alt="Image description">
+                    <figcaption> Simplified psuedo-code for the two synchronized recorders. </figcaption>
+                </figure>
+
+
+                <h3>Kinematic Projection</h3>
+                We propose a novel approach using a Gaussian heatmap to project tool tip 3D 
+                position kinematic information to 2D gray-scale endoscopic images. This relies 
+                on a hand-eye calibration to correct for the well-known inaccuracy of the dVRK 
+                kinematics.
+
+                <figure class="blog-image" style="width: 70%; margin: 1.5rem auto;">
+                    <img src="../assets/images/pages/surgsync/KP_pipeline.png" alt="Image description">
+                    <figcaption> Kinematic Projection Pipeline. This approach projects the Cartesian
+                        positions of PSM tool-yaw link to attention-weighted images. </figcaption>
+                </figure>
+                
+
+
+
+                <h3>Data Annotation GUI / Depth Viewer</h3>
+                We developed a custom data annotator with Graphical User Interface (GUI) using PyQt as shown in 
+                the figure below, enabling users to label contact detection and event/phase 
+                description during playback of consecutive frames.
+
+                <figure class="blog-image" style="width: 70%; margin: 1.5rem auto;">
+                    <img src="../assets/images/pages/surgsync/annotator_GUI.png" alt="Image description">
+                    <figcaption>Data Annotation GUI / Depth Viewer</figcaption>
+                </figure>
+
+                <h3>Our collected datasets would be published soon...</h3>
+
+                <!-- Image grid for multiple images -->
+                <!-- <div class="blog-image-grid">
+                    <figure class="blog-image">
+                        <img src="../assets/images/profile-pics/pic2.JPG" alt="Image 1">
+                        <figcaption>First image caption</figcaption>
+                    </figure>
+                    <figure class="blog-image">
+                        <img src="../assets/images/profile-pics/pic3.JPG" alt="Image 2">
+                        <figcaption>Second image caption</figcaption>
+                    </figure>
+                </div> -->
+
+
+                <!-- Tags or categories
+                <div class="blog-tags">
+                    <span class="blog-tag">Tag 1</span>
+                    <span class="blog-tag">Tag 2</span>
+                    <span class="blog-tag">Tag 3</span>
+                </div> -->
+            </div>
+
+            <!-- Navigation -->
+            <footer class="blog-footer">
+                <a href="../index.html" class="blog-back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Home
+                </a>
+            </footer>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Kevin Wu</p>
+            <p>Site last updated Dec. 2025</p>
+        </div>
+    </footer>
+
+    <!-- Sync article title to browser tab -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const articleTitle = document.querySelector('.blog-title');
+            if (articleTitle) {
+                document.title = articleTitle.textContent.trim() + ' - KevinWuWorld';
+            }
+        });
+    </script>
+</body>
+</html>
+

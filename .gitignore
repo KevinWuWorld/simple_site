@@ -1,0 +1,11 @@
+# Ignore media files in assets directory
+assets/**/*.mp4
+assets/**/*.png
+assets/**/*.jpg
+assets/**/*.jpeg
+assets/**/*.JPG
+assets/**/*.JPEG
+assets/**/*.PNG
+assets/**/*.pdf
+assets/**/*.PDF
+

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Title - KevinWuWorld</title>
+    <link rel="icon" type="image/png" href="../assets/images/site_icon.png">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="header-wrapper">
+            <div class="site-title">
+                <a href="../index.html">KevinWuWorld</a>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../coming-soon.html">Publications</a></li>
+                    <li><a href="../coming-soon.html">Visual Blog (Mostly Non-CS)</a></li>
+                    <li><a href="../assets/files/Kevin_Wu_CV_R2025.pdf" target="_blank">CV</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Article Container -->
+    <div class="blog-container">
+        <article class="blog-article">
+            <!-- Article Header -->
+            <header class="blog-header">
+                <h1 class="blog-title"> Visual Teasers: Vision-Based Lift Monitoring System</h1>
+                <!-- <div class="blog-meta"> -->
+                    <!-- <span class="blog-date">
+                        <i class="fa-regular fa-calendar"></i>
+                        December 30, 2025
+                    </span>
+                    <span class="blog-reading-time">
+                        <i class="fa-regular fa-clock"></i>
+                        5 min read
+                    </span> -->
+                <!-- </div> -->
+            </header>
+
+            <!-- Article Content -->
+            <div class="blog-content">
+
+
+                <!-- Video player -->
+                <figure class="blog-image" style="width: 100%; margin: 0rem auto;">
+                    <video controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); display: block;">
+                        <source src="../assets/images/pages/lift-monitoring/demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- <figcaption>⬆️ Overall experimental setup. We record 8 ROS topics: 3 video streams [left/right stereo, side view], plus 5 kinematic streams [ECM, PSM1, PSM2, PSM3(optional), contact sensor]. </figcaption> -->
+                </figure>
+
+                <!-- Statistics Table -->
+                <div class="blog-table-container">
+                    <table class="blog-table">
+                        <thead>
+                            <tr>
+                                <th>Instance #</th>
+                                <th>Familiar viewing angle?<br>(same as training)</th>
+                                <th>Familiar incident scenario?<br>(similar incidents seen in training)</th>
+                                <th>▲ Reaction Time (s)<br>(How much does our pipeline beat human reactions?)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>2.60</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>3.20</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>6.04</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                                <td>2.16</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>No</td>
+                                <td>No</td>
+                                <td>2.20</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Average</strong></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><strong>3.24</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+
+                </p>
+
+                <!-- Image grid for multiple images -->
+                <!-- <div class="blog-image-grid">
+                    <figure class="blog-image">
+                        <img src="../assets/images/profile-pics/pic2.JPG" alt="Image 1">
+                        <figcaption>First image caption</figcaption>
+                    </figure>
+                    <figure class="blog-image">
+                        <img src="../assets/images/profile-pics/pic3.JPG" alt="Image 2">
+                        <figcaption>Second image caption</figcaption>
+                    </figure>
+                </div> -->
+
+
+                <!-- Tags or categories
+                <div class="blog-tags">
+                    <span class="blog-tag">Tag 1</span>
+                    <span class="blog-tag">Tag 2</span>
+                    <span class="blog-tag">Tag 3</span>
+                </div> -->
+            </div>
+
+            <!-- Navigation -->
+            <footer class="blog-footer">
+                <a href="../index.html" class="blog-back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Home
+                </a>
+            </footer>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Kevin Wu</p>
+            <p>Site last updated Dec. 2025</p>
+        </div>
+    </footer>
+
+    <!-- Sync article title to browser tab -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const articleTitle = document.querySelector('.blog-title');
+            if (articleTitle) {
+                document.title = articleTitle.textContent.trim() + ' - KevinWuWorld';
+            }
+        });
+    </script>
+</body>
+</html>
+

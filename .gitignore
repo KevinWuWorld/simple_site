@@ -10,3 +10,4 @@ assets/**/*.pdf
 assets/**/*.PDF
 assets/**/*.DS_Store
 .DS_Store
+*.zip

@@ -9,5 +9,6 @@ assets/**/*.PNG
 assets/**/*.pdf
 assets/**/*.PDF
 assets/**/*.DS_Store
+improv/
 .DS_Store
 *.zip

@@ -24,13 +24,17 @@
 
 /* Masonry Grid Layout */
 .masonry-grid {
-    column-count: 2;
-    column-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-auto-rows: 10px;
+    grid-auto-flow: row;
+    gap: 1.5rem;
+    align-items: start;
 }
 
 .blog-post {
     break-inside: avoid;
-    margin-bottom: 1.5rem;
+    margin: 0;
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -245,10 +249,11 @@
 
 @media (max-width: 768px) {
     .masonry-grid {
-        column-count: 1;
-        column-gap: 0;
+        grid-template-columns: 1fr;
+        grid-auto-rows: 8px;
+        gap: 1rem;
     }
-    
+
     .blog-container {
         padding: 1.5rem 1rem 2rem;
     }
@@ -297,7 +302,7 @@
     }
     
     .blog-post {
-        margin-bottom: 1rem;
+        margin: 0;
     }
 }
 
